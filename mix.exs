@@ -12,7 +12,7 @@ defmodule ConfigDemo.MixProject do
       aliases: aliases(),
       deps: deps(),
       releases: [
-        demo: [
+        config_demo: [
           steps: [:assemble, &copy_prod_runtime_config/1]
         ]
       ]
