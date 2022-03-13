@@ -13,19 +13,10 @@ defmodule ConfigDemo.MixProject do
       deps: deps(),
       releases: [
         config_demo: [
-          steps: [:assemble, &copy_prod_runtime_config/1]
+          steps: [:assemble]
         ]
       ]
     ]
-  end
-
-  defp copy_prod_runtime_config(%Mix.Release{version_path: path} = release) do
-    File.cp!(
-      Path.join(["config", "runtime.prod.exs"]),
-      Path.join([path, "runtime.prod.exs"])
-    )
-
-    release
   end
 
   # Configuration for the OTP application.
