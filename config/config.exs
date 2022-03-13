@@ -7,6 +7,9 @@
 # General application configuration
 import Config
 
+config :config_demo,
+  ecto_repos: [ConfigDemo.Repo]
+
 # Configures the endpoint
 config :config_demo, ConfigDemoWeb.Endpoint,
   url: [host: "localhost"],

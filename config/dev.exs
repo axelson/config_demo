@@ -1,5 +1,14 @@
 import Config
 
+# Configure your database
+config :config_demo, ConfigDemo.Repo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "config_demo_dev",
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
