@@ -10,8 +10,22 @@ defmodule ConfigDemo.MixProject do
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      releases: [
+        demo: [
+          steps: [:assemble, &copy_prod_runtime_config/1]
+        ]
+      ]
     ]
+  end
+
+  defp copy_prod_runtime_config(%Mix.Release{version_path: path} = release) do
+    File.cp!(
+      Path.join(["config", "runtime.prod.exs"]),
+      Path.join([path, "runtime.prod.exs"])
+    )
+
+    release
   end
 
   # Configuration for the OTP application.
