@@ -9,11 +9,20 @@ defmodule ConfigDemo.Release do
     load_app()
 
     IO.puts("migrate")
+
+    for repo <- repos() do
+      path = Ecto.Migrator.migrations_path(repo, "data_migrations")
+      {:ok, _, _} = Ecto.Migrator.with_repo(repo, &Ecto.Migrator.run(&1, path, :up, opts))
+    end
   end
 
   def rollback(repo, version) do
     load_app()
     IO.puts("load app")
+  end
+
+  defp repos do
+    Application.fetch_env!(@app, :ecto_repos)
   end
 
   defp load_app do
